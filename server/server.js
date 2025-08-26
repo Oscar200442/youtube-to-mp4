@@ -1,18 +1,27 @@
 const express = require('express');
 const ytdl = require('ytdl-core');
 const ffmpeg = require('fluent-ffmpeg');
+const path = require('path');
 const app = express();
+
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '../public')));
 
 app.post('/convert', async (req, res) => {
   const { url } = req.body;
+  if (!ytdl.validateURL(url)) {
+    return res.status(400).json({ error: 'Invalid YouTube URL' });
+  }
   try {
     const info = await ytdl.getInfo(url);
-    const stream = ytdl(url, { quality: 'highestvideo' });
     const filename = `video-${Date.now()}.mp4`;
+    const outputPath = path.join(__dirname, '../public', filename);
+    const stream = ytdl(url, { quality: 'highestvideo' });
+    
     ffmpeg(stream)
-      .output(filename)
+      .output(outputPath)
+      .videoCodec('copy')
+      .audioCodec('aac')
       .on('end', () => {
         res.json({ downloadUrl: `/${filename}` });
       })
@@ -25,4 +34,5 @@ app.post('/convert', async (req, res) => {
   }
 });
 
-app.listen(3000, () => console.log('Server running on port 3000'));
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Server running on port ${port}`));
