@@ -1,14 +1,14 @@
 {
-  "name": "youtube-to-mp4",
-  "version": "1.0.0",
-  "description": "YouTube to MP4 converter",
-  "main": "server/server.js",
-  "scripts": {
-    "start": "node server/server.js"
-  },
-  "dependencies": {
-    "express": "^4.17.1",
-    "ytdl-core": "^4.11.0",
-    "fluent-ffmpeg": "^2.1.2"
-  }
-}
+       "name": "youtube-to-mp4",
+       "version": "1.0.0",
+       "description": "YouTube to MP4 converter",
+       "main": "server/server.js",
+       "scripts": {
+         "start": "node server/server.js"
+       },
+       "dependencies": {
+         "express": "^4.17.1",
+         "ytdl-core": "^4.11.5",
+         "fluent-ffmpeg": "^2.1.2"
+       }
+     }
