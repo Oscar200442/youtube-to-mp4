@@ -1,0 +1,12 @@
+{
+  "name": "youtube-to-mp4",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "^4.17.1",
+    "ytdl-core": "^4.11.0",
+    "fluent-ffmpeg": "^2.1.2"
+  },
+  "scripts": {
+    "start": "node server/server.js"
+  }
+}
